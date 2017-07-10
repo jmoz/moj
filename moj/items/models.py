@@ -9,6 +9,9 @@ class Item(models.Model):
     code = models.CharField(max_length=4)
     price = models.DecimalField(max_digits=8, decimal_places=2)
 
+    class Meta:
+        ordering = ['code']
+
     @property
     def price_text(self):
         return "£{}".format(self.price)
