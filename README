@@ -1,0 +1,68 @@
+To build and run the app tests, execute the following:
+
+docker build .
+
+Output as follows:
+
+ $ docker build .
+Sending build context to Docker daemon 259.1 kB
+Step 1 : FROM python:2.7
+ ---> f9a9ac5dcfb8
+Step 2 : MAINTAINER JMOZ james@jmoz.co.uk
+ ---> Using cache
+ ---> 8ae7acc0906d
+Step 3 : ENV PYTHONUNBUFFERED 1
+ ---> Using cache
+ ---> 40f095834e92
+Step 4 : ENV DJANGO_SETTINGS_MODULE moj.settings
+ ---> Running in b9bfe3d32c5d
+ ---> 57241fd7a150
+Removing intermediate container b9bfe3d32c5d
+Step 5 : RUN mkdir /code
+ ---> Running in 3285b26ed9b8
+ ---> 0ec5ae1bab04
+Removing intermediate container 3285b26ed9b8
+Step 6 : WORKDIR /code
+ ---> Running in e27f21f63428
+ ---> 8a767058f95e
+Removing intermediate container e27f21f63428
+Step 7 : ADD moj /code/
+ ---> bb43074df6c2
+Removing intermediate container b793907aad72
+Step 8 : RUN pip install -r requirements.txt
+ ---> Running in 5458a08f1567
+Collecting Django==1.11.3 (from -r requirements.txt (line 1))
+  Downloading Django-1.11.3-py2.py3-none-any.whl (6.9MB)
+Collecting djangorestframework==3.6.3 (from -r requirements.txt (line 2))
+  Downloading djangorestframework-3.6.3-py2.py3-none-any.whl (1.3MB)
+Collecting factory-boy==2.8.1 (from -r requirements.txt (line 3))
+  Downloading factory_boy-2.8.1-py2.py3-none-any.whl (46kB)
+Collecting Faker==0.7.17 (from -r requirements.txt (line 4))
+  Downloading Faker-0.7.17-py2.py3-none-any.whl (606kB)
+Collecting ipaddress==1.0.18 (from -r requirements.txt (line 5))
+  Downloading ipaddress-1.0.18-py2-none-any.whl
+Collecting python-dateutil==2.6.0 (from -r requirements.txt (line 6))
+  Downloading python_dateutil-2.6.0-py2.py3-none-any.whl (194kB)
+Collecting pytz==2017.2 (from -r requirements.txt (line 7))
+  Downloading pytz-2017.2-py2.py3-none-any.whl (484kB)
+Collecting six==1.10.0 (from -r requirements.txt (line 8))
+  Downloading six-1.10.0-py2.py3-none-any.whl
+Installing collected packages: pytz, Django, djangorestframework, six, python-dateutil, ipaddress, Faker, factory-boy
+Successfully installed Django-1.11.3 Faker-0.7.17 djangorestframework-3.6.3 factory-boy-2.8.1 ipaddress-1.0.18 python-dateutil-2.6.0 pytz-2017.2 six-1.10.0
+You are using pip version 8.1.2, however version 9.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+ ---> 1e15aef1cb5c
+Removing intermediate container 5458a08f1567
+Step 9 : RUN python manage.py test
+ ---> Running in b61e99e47d09
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.019s
+
+OK
+Destroying test database for alias 'default'...
+ ---> e7f672d5623e
+Removing intermediate container b61e99e47d09
+Successfully built e7f672d5623e
